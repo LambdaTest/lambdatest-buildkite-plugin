@@ -7,7 +7,7 @@ services:
 
   lint:
     image: buildkite/plugin-linter
-    command: ['--id', 'lambdatest/lambdatest-plugin']
+    command: ['--id', 'lambdatest/lambdatest']
     volumes:
       - ".:/plugin:ro"
       

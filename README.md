@@ -14,6 +14,6 @@ The tunnel name to use, by default it will use the Buildkite Job ID (`BUILDKITE_
 steps:
   - command: 'yarn && yarn LT test'
     plugins:
-      - lambdatest/lambdatest-plugin#v1.0.0:
+      - lambdatest/lambdatest#v1.0.0:
           tunnelName: "custom-tunnel-id"
 ```

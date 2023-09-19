@@ -9,6 +9,6 @@ docker run \
   --rm \
   -v "$(pwd):/plugin" \
   buildkite/plugin-linter \
-    --id lambdatest/lambdatest-plugin
+    --id lambdatest/lambdatest
 
 popd >/dev/null
