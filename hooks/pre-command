@@ -104,6 +104,7 @@ start() {
 
   echo "LambdaTest: Starting Tunnel"
   local pidfile="${TMP_DIR}/pid.${BUILDKITE_JOB_ID}"
+  local logfile="${TMP_DIR}/LT-${BUILDKITE_JOB_ID}.log"
 
   pushd "${TMP_DIR}" >/dev/null
 
@@ -115,12 +116,32 @@ start() {
     -k "${lt_access_key}" \
     --tunnelName "${tunnel_name}" \
     --pidfile "${pidfile}" \
-    --logFile "${TMP_DIR}/"LT-${BUILDKITE_JOB_ID}".log" \
+    --logFile "${logfile}" \
     --verbose \
     &
 
   local pid="$!"
-  wait "$pid"
+
+  local last_size=0
+  while true; do
+    # Wait for 10 seconds and then check the output
+    sleep 10
+
+    # Check the current size of the logfile
+    local current_size=$(stat -c %s "${logfile}")
+
+    # If size didn't change, then there's no new output
+    if [ "$current_size" -eq "$last_size" ]; then
+      echo "No more output from ./LT process for 10 seconds. Moving on."
+      break
+    fi
+
+    # Update last_size for next iteration
+    last_size=$current_size
+  done
+
+  popd >/dev/null
+
 }
 
 main
