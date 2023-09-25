@@ -14,6 +14,13 @@ The tunnel name to use, by default it will use the Buildkite Job ID (`BUILDKITE_
 steps:
   - command: 'yarn && yarn LT test'
     plugins:
-      - lambdatest/lambdatest#v1.0.0:
+      - lambdatest/lambdatest:
           tunnelName: "custom-tunnel-id"
 ```
+## Tests
+To run the tests, run `.ci/test.sh`
+
+## Lint
+
+* Plugin: `.ci/lint-plugin.sh`
+* Shell files `.ci/lint-shell.sh`
