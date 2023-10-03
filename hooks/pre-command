@@ -89,6 +89,22 @@ main() {
 
   maybe_download_lt
 
+
+  case "${OSTYPE}" in
+  linux*) 
+    export LT_TUNNEL_NAME="LT-${BUILDKITE_JOB_ID}"
+    ;;
+  darwin*) 
+    export LT_TUNNEL_NAME="LT-${BUILDKITE_JOB_ID}"
+    ;;
+  cygwin*|msys*|win32*|win64*) 
+    setx LT_TUNNEL_NAME "LT-${BUILDKITE_JOB_ID}" /M
+    ;;
+  *) 
+    error "Unknown OS: ${OSTYPE}"
+    ;;
+  esac
+
    start \
     "LT-${BUILDKITE_JOB_ID}" \
     "${LT_USERNAME}" \
