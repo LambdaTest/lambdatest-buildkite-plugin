@@ -6,16 +6,15 @@ It contains a [pre-command hook](hooks/pre-command), [pre-exit hook](hooks/pre-e
 
 ## Configuration
 
-### `tunnelName` (optional)
+### `tunnelName`
 
-The tunnel name to use, by default it will use the Buildkite Job ID (`BUILDKITE_JOB_ID`)
+To use a particular tunnel, you can get `LT_TUNNEL_NAME` from the environment variables in your test scripts (`BUILDKITE_JOB_ID`).
 
 ```yml
 steps:
   - command: 'yarn && yarn LT test'
     plugins:
-      - lambdatest/lambdatest:
-          tunnelName: "custom-tunnel-id"
+      - lambdatest/lambdatest~
 ```
 ## Tests
 To run the tests, run `.ci/test.sh`
