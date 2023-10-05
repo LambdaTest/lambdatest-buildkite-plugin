@@ -145,6 +145,20 @@ start() {
 
     # Check the current size of the logfile
     local current_size=$(stat -f %z "${logfile}")
+    case "${OSTYPE}" in
+    linux*) 
+      current_size=$(stat -c %s "${logfile}")
+      ;;
+    darwin*) 
+      current_size=$(stat -f %z "${logfile}")
+      ;;
+    cygwin*|msys*|win32*|win64*) 
+      current_size=$(powershell -Command "Get-Item '$logfile' | Select-Object -ExpandProperty Length")
+      ;;
+    *) 
+      error "Unknown OS: ${OSTYPE}"
+      ;;
+    esac
 
     # If size didn't change, then there's no new output
     if [ "$current_size" -eq "$last_size" ]; then
