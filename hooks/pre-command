@@ -144,7 +144,7 @@ start() {
     sleep 10
 
     # Check the current size of the logfile
-    local current_size=$(stat -f %z "${logfile}")
+    local current_size=""
     case "${OSTYPE}" in
     linux*) 
       current_size=$(stat -c %s "${logfile}")
