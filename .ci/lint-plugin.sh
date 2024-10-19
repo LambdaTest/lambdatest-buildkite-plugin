@@ -10,4 +10,8 @@ docker run \
   buildkite/plugin-linter \
     --id lambdatest/lambdatest
 
+EXIT_CODE=$?
+
 popd >/dev/null
+
+exit $EXIT_CODE

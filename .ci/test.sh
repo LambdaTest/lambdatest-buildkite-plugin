@@ -6,4 +6,8 @@ pushd "${REPO_DIR}" >/dev/null
 
 docker compose run --rm tests
 
+EXIT_CODE=$?
+
 popd >/dev/null
+
+exit $EXIT_CODE
