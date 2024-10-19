@@ -7,6 +7,34 @@ on:
         branches:
             - main
 jobs:
+    lint-plugin:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up shell environment
+              run: |
+                sudo apt-get update
+                sudo apt-get install -y shellcheck
+            
+            - name: Lint for plugins
+              run: .ci/lint-plugin.sh
+
+    lint-shell:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up shell environment
+              run: |
+                sudo apt-get update
+                sudo apt-get install -y shellcheck
+            
+            - name: Lint for shell
+              run: .ci/lint-shell.sh
+
     test:
         runs-on: ubuntu-latest
         steps:
