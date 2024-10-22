@@ -14,7 +14,7 @@ To use a particular tunnel, you can get `LT_TUNNEL_NAME` from the environment va
 steps:
   - command: 'yarn && yarn LT test'
     plugins:
-      - lambdatest/lambdatest~
+      - lambdatest/lambdatest#v1.0.0
 ```
 ## Tests
 To run the tests, run `.ci/test.sh`

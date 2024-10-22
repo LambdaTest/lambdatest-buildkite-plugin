@@ -10,6 +10,7 @@ if [[ -z "${TMP_DIR:-}" ]]; then
   export BUILDKITE_PLUGIN_LAMBDATEST_TMP_DIR="${TMP_DIR}"
 fi
 
+# shellcheck disable=SC2034
 DEFAULT_LAMBDATEST_VERSION="1.0.0"
 
 error() {
@@ -32,6 +33,7 @@ maybe_download_lt_archive() {
 
 
   if [[ ! -e "${lt_archive_path}" ]]; then
+    # shellcheck disable=SC2034
     local tmp_archive_path
 
 
@@ -39,9 +41,9 @@ maybe_download_lt_archive() {
 
     unzip "LT_binary.zip"
 
-   
+
   fi
-  
+
 }
 
 maybe_download_lt() {
@@ -49,33 +51,35 @@ maybe_download_lt() {
     echo "Binary already exists. Skipping download."
     return
   fi
-  
+
   pushd "${TMP_DIR}" >/dev/null || return
-  
+
   local os=""
   local lt_binary=""
-  
+
   case "${OSTYPE}" in
-    linux*) 
+    linux*)
       os="linux"; lt_binary="linux/64bit/LT_Linux.zip"
       ;;
 
-    darwin*) 
+    darwin*)
       os="osx"; lt_binary="mac/64bit/LT_Mac.zip"
       ;;
 
-    cygwin*|msys*|win32*|win64*) 
+    cygwin*|msys*|win32*|win64*)
+      # shellcheck disable=SC2034
       os="Windows"; lt_binary="windows/64bit/LT_Windows.zip"
       ;;
     *) error "Unknown OS: ${OSTYPE}";;
   esac
-  
+
   local lt_zip_path
 
 
+  # shellcheck disable=SC2034
   lt_zip_path=$(maybe_download_lt_archive "${lt_binary}")
 
-  
+
   popd >/dev/null || return
 }
 
@@ -85,32 +89,33 @@ main() {
   check_set LT_ACCESS_KEY
   [[ -z "${BUILDKITE_PLUGIN_LAMBDATEST_TUNNEL_IDENTIFIER:-}" ]] && check_set BUILDKITE_JOB_ID
 
+  # shellcheck disable=SC2034
   local tunnel_identifier="${BUILDKITE_PLUGIN_LAMBDATEST_TUNNEL_IDENTIFIER:-${BUILDKITE_JOB_ID}}"
 
   maybe_download_lt
 
 
   case "${OSTYPE}" in
-  linux*) 
+  linux*)
     export LT_TUNNEL_NAME="LT-${BUILDKITE_JOB_ID}"
     ;;
-  darwin*) 
+  darwin*)
     export LT_TUNNEL_NAME="LT-${BUILDKITE_JOB_ID}"
     ;;
-  cygwin*|msys*|win32*|win64*) 
+  cygwin*|msys*|win32*|win64*)
     setx LT_TUNNEL_NAME "LT-${BUILDKITE_JOB_ID}" /M
     ;;
-  *) 
+  *)
     error "Unknown OS: ${OSTYPE}"
     ;;
   esac
 
+# shellcheck disable=SC2153
    start \
     "LT-${BUILDKITE_JOB_ID}" \
     "${LT_USERNAME}" \
     "${LT_ACCESS_KEY}"
-  
-  
+
 }
 
 start() {
@@ -136,6 +141,7 @@ start() {
     --verbose \
     &
 
+  # shellcheck disable=SC2034
   local pid="$!"
 
   local last_size=0
