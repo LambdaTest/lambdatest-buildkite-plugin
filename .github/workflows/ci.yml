@@ -1,0 +1,36 @@
+name: CI Pipeline
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+jobs:
+    lint-plugin:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            
+            - name: Lint for plugins
+              run: .ci/lint-plugin.sh
+
+    lint-shell:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            
+            - name: Lint for shell
+              run: .ci/lint-shell.sh
+
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            
+            - name: Run test.sh
+              run: .ci/test.sh
+            

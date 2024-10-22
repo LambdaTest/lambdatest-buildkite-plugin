@@ -11,4 +11,8 @@ docker run \
   --rm \
   koalaman/shellcheck hooks/*
 
+EXIT_CODE=$?
+
 popd >/dev/null
+
+exit $EXIT_CODE
