@@ -56,10 +56,9 @@ sudo ./install.sh /usr/local
 For more installation options and detailed instructions, see the [official bats-core installation guide](https://bats-core.readthedocs.io/en/stable/installation.html).
 
 ## Tests
-
-To run the tests, run `.ci/test.sh`
+To run the tests, run `scripts/test.sh`
 
 ## Lint
 
-* Plugin: `.ci/lint-plugin.sh`
-* Shell files `.ci/lint-shell.sh`
+* Plugin: `scripts/lint-plugin.sh`
+* Shell files `scripts/lint-shell.sh`
