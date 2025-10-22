@@ -17,9 +17,9 @@ steps:
       - lambdatest/lambdatest#v1.0.0
 ```
 ## Tests
-To run the tests, run `.ci/test.sh`
+To run the tests, run `scripts/test.sh`
 
 ## Lint
 
-* Plugin: `.ci/lint-plugin.sh`
-* Shell files `.ci/lint-shell.sh`
+* Plugin: `scripts/lint-plugin.sh`
+* Shell files `scripts/lint-shell.sh`

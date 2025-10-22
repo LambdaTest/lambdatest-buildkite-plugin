@@ -4,6 +4,6 @@ services:
   - docker
 
 script:
-  - .ci/lint-plugin.sh
-  - .ci/lint-shell.sh
-  - .ci/test.sh
+  - scripts/lint-plugin.sh
+  - scripts/lint-shell.sh
+  - scripts/test.sh
