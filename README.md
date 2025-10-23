@@ -16,6 +16,45 @@ steps:
     plugins:
       - lambdatest/lambdatest#v1.0.0
 ```
+
+## Development
+
+### Installing `bats` for Running Hook Tests
+
+The hook tests (like `pre-command` and `pre-exit`) use [`bats`](https://github.com/bats-core/bats-core) (Bash Automated Testing System). You'll need to install `bats` before running the tests.
+
+#### Installation Options:
+
+**macOS (using Homebrew):**
+```bash
+brew install bats-core
+```
+
+**Ubuntu/Debian:**
+```bash
+sudo apt-get update
+sudo apt-get install bats
+```
+
+**Fedora/RHEL:**
+```bash
+sudo dnf install bats
+```
+
+**Using npm:**
+```bash
+npm install -g bats
+```
+
+**From source:**
+```bash
+git clone https://github.com/bats-core/bats-core.git
+cd bats-core
+sudo ./install.sh /usr/local
+```
+
+For more installation options and detailed instructions, see the [official bats-core installation guide](https://bats-core.readthedocs.io/en/stable/installation.html).
+
 ## Tests
 To run the tests, run `scripts/test.sh`
 
